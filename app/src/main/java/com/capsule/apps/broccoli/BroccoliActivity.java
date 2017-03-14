@@ -2,7 +2,6 @@ package com.capsule.apps.broccoli;
 
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.os.Bundle;
 
 import java.util.ArrayList;
@@ -23,6 +22,7 @@ public class BroccoliActivity extends AppCompatActivity {
         initialize();
         mAdapter = new CustomAdapter(this, mContacts);
         mRecyclerView.setAdapter(mAdapter);
+
     }
 
     private void initialize() {

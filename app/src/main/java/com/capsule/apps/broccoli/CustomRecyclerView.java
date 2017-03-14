@@ -53,8 +53,8 @@ public class CustomRecyclerView extends RecyclerView {
         final int top = child.getTop();
         final int left = child.getLeft();
 
-        final int childCenterY = child.getHeight()/2;
-        final int childCenterX = child.getWidth()/2;
+        final int childCenterY = child.getHeight() / 2;
+        final int childCenterX = child.getWidth() / 2;
         final int parentCenterY = getHeight();
 
         final int absChildCenterY = child.getTop() + childCenterY;
@@ -63,11 +63,23 @@ public class CustomRecyclerView extends RecyclerView {
 
         prepareMatrix(mMatrix, distanceY, radius);
         mMatrix.preTranslate(-childCenterX, -childCenterY);
-        mMatrix.postTranslate(getWidth()/2, 0);
+        mMatrix.postTranslate(getWidth() / 2, 0);
         mMatrix.postTranslate(left, top);
 
         canvas.drawBitmap(bitmap, mMatrix, mPaint);
         return true;
+    }
+
+    @Override
+    public void onDraw(Canvas canvas) {
+        mCamera.save();
+        mCamera.rotate(2, 0, 0);
+        mCamera.getMatrix(mMatrix);
+        mMatrix.preTranslate(-getWidth() / 2, -getHeight() / 2);
+        mMatrix.postTranslate(getWidth() / 2, getHeight() / 2);
+        canvas.concat(mMatrix);
+        super.onDraw(canvas);
+        mCamera.restore();
     }
 
     private void prepareMatrix(final Matrix outMatrix, int distanceY, int radius) {
@@ -81,7 +93,8 @@ public class CustomRecyclerView extends RecyclerView {
 
         mCamera.save();
         Log.d(TAG, String.format("Radius - TranslationZ: %f", radius - translationZ));
-        mCamera.translate(0, 0, radius - translationZ);
+        //mCamera.rotate(2, 0, 0);
+        //mCamera.translate(0, 0, radius - translationZ);
         /*mCamera.rotateX((float) degree);
         if (distanceY < 0) {
             degree = 360 - degree;
