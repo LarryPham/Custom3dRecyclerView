@@ -4,45 +4,98 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:clickable="true"
-    android:background="?attr/selectableItemBackground">
+    android:clickable="false">
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:layout_centerInParent="true"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
         tools:ignore="UselessParent">
-        <ImageView
-            android:id="@+id/contact_image"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginRight="16dp"
-            android:src="@android:color/holo_blue_light"/>
 
-        <TextView
-            android:id="@+id/contact_name"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/contact_image"
-            android:layout_toEndOf="@+id/contact_image"
-            android:text="Larry Pham"
-            android:textColor="@color/color_contact_name"
-            android:textSize="16sp"/>
+            android:weightSum="3.0"
+            android:layout_marginRight="10dp"
+            android:orientation="horizontal">
+            <ImageView
+                android:id="@+id/first_image"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_weight="1.0"
+                android:layout_margin="5dp"
+                android:clickable="true"
+                android:src="@drawable/circle_shape_background"/>
 
-        <TextView
-            android:id="@+id/contact_address"
+            <ImageView
+                android:id="@+id/second_image"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_weight="1.0"
+                android:layout_margin="5dp"
+                android:clickable="true"
+                android:src="@drawable/circle_shape_background"/>
+
+            <ImageView
+                android:id="@+id/third_image"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_weight="1.0"
+                android:layout_margin="5dp"
+                android:clickable="true"
+                android:src="@drawable/circle_shape_background"/>
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/contact_name"
-            android:layout_toEndOf="@+id/contact_image"
-            android:text="1st Hamlet - Khanh Hong - Yen Khanh - Ninh Binh"
-            android:textColor="@color/color_contact_address"
-            android:textSize="12sp"/>
-    </RelativeLayout>
+            android:weightSum="3.0"
+            android:layout_marginLeft="10dp"
+            android:orientation="horizontal">
+            <ImageView
+                android:id="@+id/four_image"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_weight="1.0"
+                android:clickable="true"
+                android:src="@drawable/circle_shape_background"/>
+
+            <ImageView
+                android:id="@+id/five_image"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_weight="1.0"
+                android:clickable="true"
+                android:src="@drawable/circle_shape_background"/>
+
+            <ImageView
+                android:id="@+id/six_image"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_weight="1.0"
+                android:clickable="true"
+                android:src="@drawable/circle_shape_background"/>
+        </LinearLayout>
+
+    </LinearLayout>
 
 
 </RelativeLayout>

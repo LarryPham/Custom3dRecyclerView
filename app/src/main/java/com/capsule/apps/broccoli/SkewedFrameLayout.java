@@ -8,16 +8,17 @@ import android.graphics.Color;
 import android.graphics.LightingColorFilter;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.support.annotation.AttrRes;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 
-/**
- * The CustomRecyclerView which repesent to display the bunch of items.
- */
-public class CustomRecyclerView extends RecyclerView {
+
+public class SkewedFrameLayout extends RelativeLayout {
 
     private static final String TAG = CustomRecyclerView.class.getSimpleName();
 
@@ -27,27 +28,31 @@ public class CustomRecyclerView extends RecyclerView {
     private static final float SHININESS = 200;
     private static final int MAX_INTENSITY = 0xFFFFFF;
 
-    private final Camera mCamera = new Camera();
-    private final Matrix mMatrix = new Matrix();
+    private Camera mCamera = new Camera();
+    private Matrix mMatrix = new Matrix();
 
     private final Paint mPaint = new Paint(Paint.FILTER_BITMAP_FLAG);
-
-    public CustomRecyclerView(Context context) {
+    public SkewedFrameLayout(@NonNull Context context) {
         super(context);
-        mPaint.setAntiAlias(true);
+        initialize();
     }
 
-    public CustomRecyclerView(Context context, @Nullable AttributeSet attrs) {
+    public SkewedFrameLayout(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        mPaint.setAntiAlias(true);
+        initialize();
     }
 
-    public CustomRecyclerView(Context context, @Nullable AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
-        mPaint.setAntiAlias(true);
+    public SkewedFrameLayout(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        initialize();
     }
 
-  /* @Override
+    private void initialize() {
+        mCamera = new Camera();
+        mMatrix = new Matrix();
+    }
+
+   /*@Override
     public boolean drawChild(Canvas canvas, View child, long drawingTime) {
         Bitmap bitmap = getChildDrawingCache(child);
         final int top = child.getTop();
@@ -63,7 +68,7 @@ public class CustomRecyclerView extends RecyclerView {
 
         prepareMatrix(mMatrix, distanceY, radius);
         mMatrix.preTranslate(-childCenterX, -childCenterY);
-        mMatrix.postTranslate(getWidth() / 2, 0);
+        mMatrix.postTranslate(getWidth() / 2, getHeight() /2);
         mMatrix.postTranslate(left, top);
 
         canvas.drawBitmap(bitmap, mMatrix, mPaint);
@@ -72,21 +77,12 @@ public class CustomRecyclerView extends RecyclerView {
 
     @Override
     public void onDraw(Canvas canvas) {
-        mMatrix.reset();
-        mCamera.save();
-
-        mCamera.rotate(5, 0, 0);
-        mCamera.getMatrix(mMatrix);
-        mCamera.restore();
-
-        mMatrix.preTranslate(-getWidth() / 2, -getHeight() / 2);
-        mMatrix.postTranslate(getWidth() / 2, getHeight() / 2);
-
-        canvas.concat(mMatrix);
-
+        canvas.translate(0, getHeight());
+        canvas.skew(20f, 5f);
+        canvas.translate(0, -getHeight());
         super.onDraw(canvas);
+        invalidate();
     }
-
     private void prepareMatrix(final Matrix outMatrix, int distanceY, int radius) {
         final int distance = Math.min(radius, Math.abs(distanceY));
         Log.d(TAG, String.format("Distance: %d ,Radius: %d, DistanceY: %d", distance, radius, distanceY));
@@ -98,7 +94,7 @@ public class CustomRecyclerView extends RecyclerView {
 
         mCamera.save();
         Log.d(TAG, String.format("Radius - TranslationZ: %f", radius - translationZ));
-        //mCamera.rotate(1, 0, 0);
+        mCamera.rotate(2, 0, 0);
         //mCamera.translate(0, 0, radius - translationZ);
         /*mCamera.rotateX((float) degree);
         if (distanceY < 0) {
@@ -108,7 +104,7 @@ public class CustomRecyclerView extends RecyclerView {
         mCamera.getMatrix(outMatrix);
         mCamera.restore();
 
-        mPaint.setColorFilter(calculateLight((float) degree));
+        //mPaint.setColorFilter(calculateLight((float) degree));
     }
 
     private Bitmap getChildDrawingCache(final View child) {

@@ -4,25 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.capsule.apps.broccoli.BroccoliActivity">
-    <com.capsule.apps.broccoli.CustomRecyclerView
-        android:id="@+id/contact_listview"
+    android:background="#232323"
+    tools:context="com.capsule.apps.broccoli.BroccoliActivity"
+    android:orientation="vertical">
+    <com.capsule.apps.broccoli.SkewedFrameLayout
+        android:id="@+id/main_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:foregroundGravity="center_horizontal"
-        android:scrollbars="none"
-        tools:listitem="@layout/custom_item_view"/>
-    <!--<com.capsule.apps.broccoli.CustomSrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <Button
+        android:layout_height="match_parent">
+        <com.capsule.apps.broccoli.CustomRecyclerView
+            android:id="@+id/contact_listview"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Fuck Me!"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Suck Me!"/>
-    </com.capsule.apps.broccoli.CustomSrollView>-->
+            android:layout_height="match_parent"
+            android:scrollbars="none"
+            tools:listitem="@layout/custom_item_view"
+            android:paddingBottom="60dp"/>
+    </com.capsule.apps.broccoli.SkewedFrameLayout>
 </LinearLayout>
+
+
+
+
+
+
+
+

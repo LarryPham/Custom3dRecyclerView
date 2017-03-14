@@ -29,9 +29,11 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ContactHol
     @Override
     public void onBindViewHolder(ContactHolder holder, int position) {
         final Contact contact = mContacts.get(position);
-        holder.contactImage.setColorFilter(contact.getContactColor());
-        holder.contactName.setText(contact.getName());
-        holder.contactAddress.setText(contact.getAddress());
+        if (position % 3 == 0) {
+            holder.firstImage.setEnabled(false);
+        }  else {
+            holder.fifthImage.setEnabled(true);
+        }
     }
 
     @Override
@@ -45,15 +47,18 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ContactHol
     }
 
     static class ContactHolder extends RecyclerView.ViewHolder {
-        ImageView contactImage;
-        TextView contactName;
-        TextView contactAddress;
+        ImageView firstImage, secondImage, thirdImage, forthImage, fifthImage, sixthImage;
+
 
         ContactHolder(View itemView) {
             super(itemView);
-            contactImage = (ImageView) itemView.findViewById(R.id.contact_image);
-            contactName = (TextView) itemView.findViewById(R.id.contact_name);
-            contactAddress = (TextView) itemView.findViewById(R.id.contact_address);
+            firstImage = (ImageView) itemView.findViewById(R.id.first_image);
+            secondImage = (ImageView) itemView.findViewById(R.id.second_image);
+            thirdImage = (ImageView) itemView.findViewById(R.id.third_image);
+            forthImage = (ImageView) itemView.findViewById(R.id.four_image);
+            fifthImage = (ImageView) itemView.findViewById(R.id.five_image);
+            sixthImage = (ImageView) itemView.findViewById(R.id.six_image);
+
         }
     }
 }
